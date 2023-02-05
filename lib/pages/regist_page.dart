@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,13 +15,20 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
+  final uid = FirebaseAuth.instance.currentUser?.uid;
   final usernameController = TextEditingController();
-
   final emailController = TextEditingController();
-
   final passwordController = TextEditingController();
-
   final confirmpassewordController = TextEditingController();
+
+  @override
+  void dispose(){
+    usernameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmpassewordController.dispose();
+    super.dispose();
+  }
 
   void signUserUp() async{
     showDialog(
@@ -33,7 +41,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
     );
 
     try {
-      if(usernameController.text == null)
       if(passwordController.text == confirmpassewordController.text){
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text, 
@@ -48,8 +55,22 @@ class _RegistrationPageState extends State<RegistrationPage> {
       Navigator.pop(context);
       showErrorMesage(e.code);
     }
+
+    //user detail
+    addUserDetails(
+      usernameController.text.trim(),
+      emailController.text.trim(),
+    );
   } 
-  
+    Future addUserDetails(String userName, String email) async{
+      await FirebaseFirestore.instance.collection('users').doc(uid).set({
+        'user name':userName,
+        'email':email,
+      });
+    }
+
+
+
     void showErrorMesage(String message){
       showDialog(
         context: context, 
@@ -113,7 +134,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 MyTextField(
                   controller: passwordController, 
                   hintText: 'Password', 
-                  obscureText: false, 
+                  obscureText: true, 
                   fieldIcon: Icons.lock,
                   fieldAction: TextInputAction.next,                
                 ),
@@ -124,7 +145,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 MyTextField(
                   controller:confirmpassewordController, 
                   hintText: 'Konfirmasi Password', 
-                  obscureText: false, 
+                  obscureText: true, 
                   fieldIcon: Icons.key,
                   fieldAction: TextInputAction.done,                
                 ),

@@ -6,6 +6,8 @@ import 'package:wanagama_app/pages/dashboard_page.dart';
 import 'package:wanagama_app/pages/profile_page.dart';
 import 'package:wanagama_app/pages/status_page.dart';
 
+import '../constant.dart';
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
   @override
@@ -21,9 +23,15 @@ class _MyHomePageState extends State<MyHomePage> {
     DraftPage(),
     StatusPage(),
   ];
+    List<String> titleList = [
+    'Home',
+    'Draft',
+    'Status',
+    'Profile',
+  ];
 
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = DraftPage();
+  Widget currentScreen = DashboardPage();
   
   void SignUserOut (){
     FirebaseAuth.instance.signOut();
@@ -35,31 +43,36 @@ class _MyHomePageState extends State<MyHomePage> {
       body: PageStorage(
         bucket: bucket,
         child: currentScreen),
-      backgroundColor: Colors.white,  
+      backgroundColor: Colors.transparent,  
       appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(titleList[currentTab], style: TextStyle(
+              color:Colors.white,
+              fontWeight: FontWeight.w500,
+              fontSize: 24,
+            ),),
+          ],
+        ),
+        backgroundColor: Color.fromARGB(255, 19, 85, 68),
+        elevation: 0.0,
         actions: [
-          IconButton(onPressed: SignUserOut, icon: Icon(Icons.logout))
+          IconButton(onPressed: SignUserOut, icon: Icon(Icons.info))
         ],
-        title: const Text(
-          'Wanagama Mobile App',
-          style: TextStyle(
-            fontFamily: 'Bellota',
-            fontWeight: FontWeight.bold
-          ),
-          ),
-        backgroundColor:Color.fromARGB(255, 19, 85, 68), 
+
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Color.fromARGB(255, 19, 85, 68),
+        color: Constants.primaryColor,
         shape: CircularNotchedRectangle(),
-        notchMargin: 8,
+        notchMargin: 9,
         child: Container(
           height: 60,
           child: Row(
            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children:<Widget> [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal:8.0),
+                padding: const EdgeInsets.symmetric(horizontal:5.0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -87,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ]),
                     ),
-                    SizedBox(width: 20,),
+                    SizedBox(width: 10,),
                     MaterialButton(
                       minWidth: 40,
                       onPressed: (){
@@ -116,7 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal:8.0),
+                padding: const EdgeInsets.symmetric(horizontal:5.0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -144,7 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ]),
                     ),
-                    SizedBox(width: 20,),
+                    SizedBox(width: 10,),
                     MaterialButton(
                       minWidth: 40,
                       onPressed: (){
@@ -180,7 +193,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed:(){
-          Navigator.of(context).push(_swipeUpRoute());
+          Navigator.of(context).push(_swipeUpRoute()).then((_) => setState(() {
+            
+          },));
         },
         backgroundColor: Color.fromARGB(243, 243, 209, 16),
         child: Icon(Icons.add),

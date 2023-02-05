@@ -11,6 +11,9 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+
+  final user = FirebaseAuth.instance.currentUser!;
+
     Future<void> SignUserOut () async {
     await FirebaseAuth.instance.signOut();
   }
@@ -28,6 +31,15 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Image.asset('lib/assets/images/wanagama_hor.png'),
+            Text(
+              'Hallo, ${user.email}',
+              style: TextStyle(
+                fontFamily: "Bellota",
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+              ),
             SizedBox(
               height: size.height * .7,
               width: size.width,

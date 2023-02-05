@@ -49,6 +49,12 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  @override
+  void dispose(){
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
   void WrongEmailMessage(){
     showDialog(
       context: context, 
