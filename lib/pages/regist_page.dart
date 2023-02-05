@@ -15,7 +15,7 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
-  final uid = FirebaseAuth.instance.currentUser?.uid;
+  final String? uid = FirebaseAuth.instance.currentUser?.uid;
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();

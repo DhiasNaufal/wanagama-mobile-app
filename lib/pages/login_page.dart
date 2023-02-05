@@ -6,6 +6,9 @@ import 'package:wanagama_app/components/my_button.dart';
 import 'package:wanagama_app/components/my_textfield.dart';
 import 'package:wanagama_app/components/square_tile.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wanagama_app/services/auth_services.dart';
+
+import '../constant.dart';
 
 class LoginPage extends StatefulWidget {
   void Function()? onTap;
@@ -118,15 +121,14 @@ class _LoginPageState extends State<LoginPage> {
               // Username Field
               MyTextField(
                 controller: emailController,
-                hintText: 'Username', 
+                hintText: 'Email', 
                 obscureText: false, fieldIcon: Icons.person,
                 fieldAction: TextInputAction.next,
                 ),
           
               SizedBox(height: 10,),
           
-              MyTextField(
-          
+              MyTextField(         
                 controller: passwordController,
                 hintText: 'Password',
                 obscureText: true, fieldIcon: Icons.key,
@@ -196,25 +198,53 @@ class _LoginPageState extends State<LoginPage> {
           
               SizedBox(height: 10,),
               // Alternative Sign In
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SquareTile(
-                      imagePath: "lib/assets/images/google_logo.png"
-                      ),
-          
-                    SizedBox(width: 10,),
-          
-                    SquareTile(
-                      imagePath: "lib/assets/images/facebook_logo.png"
-                      ),
-                  ],
+              GestureDetector(
+                onTap: () => AuthService().signInWithGoogle(),
+                child: Container(
+                  padding: EdgeInsets.all(7),
+                  margin: EdgeInsets.symmetric(horizontal: 25),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(1),
+                    color: Colors.blueGrey,
+                  ),
+                  child: Center(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 12,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(1),
+              
+                            ),
+                            child: Image.asset('lib/assets/images/google_logo.png',
+                            height: 40,),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 85,
+                          child: Center(
+                            child: Text(
+                              'Sign in with Google ',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16  ,
+                                fontWeight: FontWeight.bold
+                              ),
+                              ),
+                          ),
+                        ),
+                      ],
+                    )),
                 ),
               ),
-          
-          
+
+              SizedBox(height: 25,),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Text(
+                  '2023 © khdtk wanagama ugm')),          
             ],),
           ),
         ),

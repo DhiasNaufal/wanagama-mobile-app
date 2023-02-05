@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wanagama_app/components/profile_widget.dart';
@@ -33,7 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             Image.asset('lib/assets/images/wanagama_hor.png'),
             Text(
-              'Hallo, ${user.email}',
+              '${user.email}',
               style: TextStyle(
                 fontFamily: "Bellota",
                 fontWeight: FontWeight.bold,

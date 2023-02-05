@@ -19,7 +19,7 @@ class _StatusPageState extends State<StatusPage> {
     .collection('users')
     .doc(uid)
     .collection('form')
-    .where('status', isEqualTo: false)
+    .where('status', isEqualTo: 'Diproses')
     .get();
 
     setState((){
@@ -42,28 +42,6 @@ class _StatusPageState extends State<StatusPage> {
         itemBuilder: (context, index) {
           return FormCard(statusList[index]as Forms);
         },),
-
-
-      /*
-      body: StreamBuilder<QuerySnapshot>(
-        stream: db.collection('form').snapshots(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }else
-          return ListView(
-            children: snapshot.data!.docs.map((doc) {
-              return Card(
-                child: ListTile(
-                  title: Text(doc.data().toString()),
-                ),
-              );
-            }).toList(),
-          );       
-        },
-        ),*/
     );
   }
 }

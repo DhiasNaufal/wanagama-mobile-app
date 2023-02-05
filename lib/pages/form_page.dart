@@ -56,7 +56,7 @@ class _MyFormPageState extends State<MyFormPage> {
   final totimeinput = TextEditingController();
   final surveyController = TextEditingController();
   final jumlahController = TextEditingController();
-  bool status = false;
+  final String status = 'Draft';
   // ===================
   
 
@@ -88,75 +88,17 @@ class _MyFormPageState extends State<MyFormPage> {
     _form.waktuAkhir= totimeinput.text.trim();
     _form.survey= selectedSurvey;
     _form.jumlahRombongan= int.parse(jumlahController.text.trim());
-    _form.status= status;
+    _form.status = status;
+    _form.id = DateTime.now().millisecondsSinceEpoch.toString();
+      
 
-    await FirebaseFirestore.instance.collection('users').doc(uid).collection('form').add(_form.toJson());
+    await FirebaseFirestore.instance.collection('users').doc(uid).collection('form').doc(_form.id).set(_form.toJson());
     Fluttertoast.showToast(msg: 'Form Tersimpan');
     Navigator.pop(context);
     }
     Fluttertoast.showToast(msg: 'Form Belum Lengkap');
 
   }
-
-  Future tapSimpan() async{
-    if(_formKey.currentState!.validate()){
-    addForm(
-      namaLengkapController.text,
-      emailController.text.trim(),
-      int.parse(nomorHandphoneController.text.trim()),
-      selectedTujuan,
-      instansiController.text.trim(),
-      fromdateinput.text.trim(),
-      todateinput.text.trim(),
-      fromtimeinput.text.trim(),
-      totimeinput.text.trim(),
-      selectedSurvey,
-      int.parse(jumlahController.text.trim()),
-      status
-    );
-    Fluttertoast.showToast(msg: 'Form Tersimpan');
-    //final snackBar = SnackBar(content: Text('Form Tersimpan'),);
-    //ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    Navigator.pop(context);
-    }
-    Fluttertoast.showToast(msg: 'Form Belum Lengkap');
-
-
-  }
-
-  Future addForm(
-    
-    String namaLengkap, 
-    String email, 
-    int nomorHandphone,
-    String tujuan,
-    String namaInstansi,
-    String tangalMulai,
-    String waktuMulai,
-    String tanggalAkhir,
-    String waktuAkir,
-    String survey,
-    int jumlahRombongan,
-    bool status,
-    )
-    async{
-    await FirebaseFirestore.instance.collection('users').doc(uid).collection('form').add({
-      'nama lengkap':namaLengkap,
-      'alamat email': email,
-      'nomor handphone':nomorHandphone,
-      'tujuan': tujuan,
-      'nama instansi':namaInstansi,
-      'tanggal mulai':tangalMulai,
-      'waktu mulai': waktuMulai,      
-      'tanggal akhir':tanggalAkhir,
-      'waktu akhir':tanggalAkhir,
-      'survey':survey,
-      'jumlah rombongan':jumlahRombongan,
-      'status': status,
-      'userId': user.uid,
-    });
-  }
-
 final _formKey = GlobalKey<FormState>();
   @override
   void initState() {

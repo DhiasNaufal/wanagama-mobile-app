@@ -20,7 +20,7 @@ class _DraftPageState extends State<DraftPage> {
     .collection('users')
     .doc(uid)
     .collection('form')
-    .where('status', isEqualTo: false)
+    .where('status', isEqualTo: 'Draft')
     .get();
 
     setState((){

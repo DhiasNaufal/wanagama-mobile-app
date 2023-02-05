@@ -5,6 +5,7 @@ class Constants {
   //Primary color
   static var primaryColor = const Color.fromARGB(255, 19, 85, 68);
   static var blackColor = Colors.black54;
+  static var secondaryColor = Color.fromARGB(0, 117, 103, 162);
 
   //Onboarding texts
   static var titleOne = "Learn more about plants";

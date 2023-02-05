@@ -12,7 +12,8 @@ class Forms{
     String? waktuAkhir;
     String? survey;
     int? jumlahRombongan;
-    bool? status;  
+    String? status;  
+    String? id;
 
     Forms();
     Map<String, dynamic> toJson()=>{
@@ -27,12 +28,13 @@ class Forms{
       'waktu akhir':waktuAkhir,
       'survey':survey,
       'jumlah rombongan':jumlahRombongan,
-      'status': status,     
+      'status': status,   
+      'docId':id,  
     };
 
   Forms.fromSnapshot(snapshot)
     : namaLengkap = snapshot.data()['nama lengkap'],
-      email = snapshot.data()['alaat email'],
+      email = snapshot.data()['alamat email'],
       nomorHandphone = snapshot.data()['nomor handphone'],
       tujuan = snapshot.data()['tujuan'],
       namaInstansi = snapshot.data()['nama instansi'],
@@ -42,7 +44,8 @@ class Forms{
       waktuAkhir= snapshot.data()['waktu akhir'],
       survey = snapshot.data()['survey'],
       jumlahRombongan = snapshot.data()['jumlah rombongan'],
-      status = snapshot.data()['status'];
+      status = snapshot.data()['status'],
+      id = snapshot.data()['docId'];
 
 
 
