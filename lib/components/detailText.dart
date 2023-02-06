@@ -29,7 +29,7 @@ class DetailText extends StatelessWidget {
               child: Text(
                 value,
                 style: GoogleFonts.poppins(
-                  fontSize: 18,
+                  fontSize: 16.5,
                 ),
               ))
         ],

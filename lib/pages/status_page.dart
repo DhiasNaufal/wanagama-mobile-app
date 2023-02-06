@@ -19,7 +19,7 @@ class _StatusPageState extends State<StatusPage> {
     .collection('users')
     .doc(uid)
     .collection('form')
-    .where('status', isEqualTo: 'Diproses')
+    .where('status', isNotEqualTo: 'Draft')
     .get();
 
     setState((){

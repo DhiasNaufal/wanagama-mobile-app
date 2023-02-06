@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import 'package:wanagama_app/theme/color.dart';
 
 class MyButton extends StatelessWidget {
 

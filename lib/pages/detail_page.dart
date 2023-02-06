@@ -4,15 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wanagama_app/components/detailText.dart';
+import 'package:wanagama_app/pages/auth_page.dart';
+import 'package:wanagama_app/pages/draft_page.dart';
+import 'package:wanagama_app/pages/home_page.dart';
 
 import '../constant.dart';
 import '../models/form.dart';
 
-class DetailedForm extends StatelessWidget {
-  final uid = FirebaseAuth.instance.currentUser?.uid;
+class DetailedForm extends StatefulWidget {
   final Forms form;
 
   DetailedForm(this.form);
+
+  @override
+  State<DetailedForm> createState() => _DetailedFormState();
+}
+
+class _DetailedFormState extends State<DetailedForm> {
+  final uid = FirebaseAuth.instance.currentUser?.uid;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +83,7 @@ class DetailedForm extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        "${form.tujuan}",
+                                        "${widget.form.tujuan}",
                                         style: GoogleFonts.poppins(
                                             fontSize: 20, color: Colors.white),
                                       ),
@@ -98,12 +107,12 @@ class DetailedForm extends StatelessWidget {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              Text("${form.tangalMulai}",
+                                              Text("${widget.form.tangalMulai}",
                                                   style: GoogleFonts.poppins(
                                                       fontSize: 17,
                                                       fontWeight:
                                                           FontWeight.w500)),
-                                              Text("${form.waktuMulai}",
+                                              Text("${widget.form.waktuMulai}",
                                                   style: GoogleFonts.poppins(
                                                     fontSize: 17,
                                                   )),
@@ -117,13 +126,13 @@ class DetailedForm extends StatelessWidget {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Text(
-                                                "${form.tanggalAkhir}",
+                                                "${widget.form.tanggalAkhir}",
                                                 style: GoogleFonts.poppins(
                                                     fontSize: 17,
                                                     fontWeight:
                                                         FontWeight.w500),
                                               ),
-                                              Text("${form.waktuAkhir}",
+                                              Text("${widget.form.waktuAkhir}",
                                                   style: GoogleFonts.poppins(
                                                     fontSize: 17,
                                                   )),
@@ -154,7 +163,7 @@ class DetailedForm extends StatelessWidget {
                                                 SizedBox(
                                                   width: 5,
                                                 ),
-                                                Text("${form.jumlahRombongan}"),
+                                                Text("${widget.form.jumlahRombongan}"),
                                               ],
                                             )),
                                       ),
@@ -170,7 +179,7 @@ class DetailedForm extends StatelessWidget {
                                             ),
                                             height: 40,
                                             child: Center(
-                                                child: Text("${form.status}"))),
+                                                child: Text("${widget.form.status}"))),
                                       ),
                                     ],
                                   )
@@ -204,19 +213,19 @@ class DetailedForm extends StatelessWidget {
                             ),
                             DetailText(
                                 field: 'Nama Lengkap',
-                                value: '${form.namaLengkap}'),
+                                value: '${widget.form.namaLengkap}'),
                             DetailText(
-                                field: 'Alamat Email', value: '${form.email}'),
+                                field: 'Alamat Email', value: '${widget.form.email}'),
                             DetailText(
                                 field: 'Nomor Telepon',
-                                value: '${form.nomorHandphone}'),
+                                value: '${widget.form.nomorHandphone}'),
                             DetailText(
                                 field: 'Instansi',
-                                value: '${form.namaInstansi}'),
+                                value: '${widget.form.namaInstansi}'),
                             DetailText(
                                 field: 'Status Survey',
-                                value: '${form.survey}'),
-                                SizedBox(height: 50,),
+                                value: '${widget.form.survey}'),
+                                SizedBox(height: 45,),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
@@ -294,14 +303,14 @@ class DetailedForm extends StatelessWidget {
       ),
     );
   }
-  
+
   void tapKirim() async{
     final String newStatus = 'Proses';
-    form.status= newStatus;
-    await FirebaseFirestore.instance.collection('users').doc(uid).collection('form').doc(form.id).update({
+    widget.form.status= newStatus;
+    await FirebaseFirestore.instance.collection('users').doc(uid).collection('form').doc(widget.form.id).update({
       'status' :"Diproses",
     });
-
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) =>  AuthPage()));
     //Navigator.of(context).pop();
     
   } 

@@ -4,7 +4,6 @@ import 'package:wanagama_app/pages/auth_page.dart';
 import 'package:wanagama_app/pages/detail_page.dart';
 import 'package:wanagama_app/pages/home_page.dart';
 import 'package:wanagama_app/pages/regist_page.dart';
-import 'package:wanagama_app/theme/color.dart';
 import 'firebase_options.dart';
 import 'pages/login_page.dart';
 void main()async {
