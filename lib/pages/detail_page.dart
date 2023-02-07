@@ -44,26 +44,39 @@ class _DetailedFormState extends State<DetailedForm> {
             ),
             Column(
               children: <Widget>[
-                SizedBox(height: 25,),
+                SizedBox(
+                  height: 10,
+                ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left:10.0),
-                      child: Text('Formulir Pemesanan',
-                      style: GoogleFonts.bellota(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w700
-                      ),
+                      padding: const EdgeInsets.only(left: 10.0),
+                      child: Text(
+                        'Formulir Pemesanan',
+                        style: GoogleFonts.bellota(
+                            color: Colors.white,
+                            fontSize: 29,
+                            fontWeight: FontWeight.w700),
                       ),
                     ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 10),
                       padding:
                           EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                       decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: "${widget.form.status}" == "Ditolak"
+                              ? Colors.red
+                              : "${widget.form.status}" == "Diterima"
+                                  ? Colors.green
+                                  : "${widget.form.status}" == "Diproses"
+                                      ? Colors.orange
+                                      : Colors.blueGrey,
                           borderRadius: BorderRadius.circular(8)),
                       child: Text(
                         "${widget.form.status}",
@@ -318,150 +331,173 @@ class _DetailedFormState extends State<DetailedForm> {
                 SizedBox(
                   height: 25,
                 ),
-                '${widget.form.status}'=="Draft"? Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Container(
-                    height: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            spreadRadius: 1,
-                            blurRadius: 7),
-                      ],
-                    ),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: tapHapus,
-                              child: Container(
-                                margin: EdgeInsets.only(left: 10, right: 2),
-                                child: Center(
-                                    child: Text(
-                                  'Hapus',
-                                  style: GoogleFonts.workSans(
-                                      color: Constants.primaryColor,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500),
-                                )),
-                                height: 60,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Constants.primaryColor),
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Constants.primaryColor
-                                        .withOpacity(0.4)),
-                              ),
-                            ),
+                '${widget.form.status}' == "Draft"
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Container(
+                          height: 100,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black.withOpacity(0.2),
+                                  spreadRadius: 1,
+                                  blurRadius: 7),
+                            ],
                           ),
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: tapKirim,
-                              child: Container(
-                                margin: EdgeInsets.only(right: 10, left: 2),
-                                child: Center(
-                                    child: Text(
-                                  "Kirim",
-                                  style: GoogleFonts.workSans(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500),
-                                )),
-                                height: 60,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Constants.primaryColor),
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Constants.primaryColor),
-                              ),
-                            ),
-                          ),
-                        ]),
-                  ),
-                )
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: tapHapus,
+                                    child: Container(
+                                      margin:
+                                          EdgeInsets.only(left: 10, right: 2),
+                                      child: Center(
+                                          child: Text(
+                                        'Hapus',
+                                        style: GoogleFonts.workSans(
+                                            color: Constants.primaryColor,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w500),
+                                      )),
+                                      height: 60,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Constants.primaryColor),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: Constants.primaryColor
+                                              .withOpacity(0.4)),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: tapKirim,
+                                    child: Container(
+                                      margin:
+                                          EdgeInsets.only(right: 10, left: 2),
+                                      child: Center(
+                                          child: Text(
+                                        "Kirim",
+                                        style: GoogleFonts.workSans(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w500),
+                                      )),
+                                      height: 60,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Constants.primaryColor),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: Constants.primaryColor),
+                                    ),
+                                  ),
+                                ),
+                              ]),
+                        ),
+                      )
 
-                //Terima Tolak
-                :'${widget.form.status}'=="Diproses"&&uid!="E80hb9Qun4bUswTIyiUmfSmssbb2"?Container(
-                  // Container sedang diproses
-                )
-                :uid=="E80hb9Qun4bUswTIyiUmfSmssbb2"?Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Container(
-                    height: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            spreadRadius: 1,
-                            blurRadius: 7),
-                      ],
-                    ),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: tapTolak,
-                              child: Container(
-                                margin: EdgeInsets.only(left: 10, right: 2),
-                                child: Center(
-                                    child: Text(
-                                  'Tolak',
-                                  style: GoogleFonts.workSans(
-                                      color: Constants.primaryColor,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500),
-                                )),
-                                height: 60,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Constants.primaryColor),
+                    //Terima Tolak
+                    : '${widget.form.status}' == "Diproses" &&
+                            uid != "E80hb9Qun4bUswTIyiUmfSmssbb2"
+                        ? Container(
+                            // Container sedang diproses
+                            )
+                        : '${widget.form.status}' == "Diproses" &&
+                                uid == "E80hb9Qun4bUswTIyiUmfSmssbb2"
+                            ? Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10.0),
+                                child: Container(
+                                  height: 100,
+                                  decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color: Constants.primaryColor
-                                        .withOpacity(0.4)),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: tapTerima,
-                              child: Container(
-                                margin: EdgeInsets.only(right: 10, left: 2),
-                                child: Center(
-                                    child: Text(
-                                  "Terima",
-                                  style: GoogleFonts.workSans(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500),
-                                )),
-                                height: 60,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Constants.primaryColor),
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Constants.primaryColor),
-                              ),
-                            ),
-                          ),
-                        ]),
-                  ),
-                )
-                
-                :'${widget.form.status}'=="Diterima"&&uid!="E80hb9Qun4bUswTIyiUmfSmssbb2"?Container(
-                  // Barcode
-                )
-                :'${widget.form.status}'=="Ditolak"&&uid!="E80hb9Qun4bUswTIyiUmfSmssbb2"?Container(
-                  // Status Penolakan
-                )
-
-                :Text("Done"),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.black.withOpacity(0.2),
+                                          spreadRadius: 1,
+                                          blurRadius: 7),
+                                    ],
+                                  ),
+                                  child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          child: GestureDetector(
+                                            onTap: tapTolak,
+                                            child: Container(
+                                              margin: EdgeInsets.only(
+                                                  left: 10, right: 2),
+                                              child: Center(
+                                                  child: Text(
+                                                'Tolak',
+                                                style: GoogleFonts.workSans(
+                                                    color:
+                                                        Constants.primaryColor,
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              )),
+                                              height: 60,
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Constants
+                                                          .primaryColor),
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Constants.primaryColor
+                                                      .withOpacity(0.4)),
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: GestureDetector(
+                                            onTap: tapTerima,
+                                            child: Container(
+                                              margin: EdgeInsets.only(
+                                                  right: 10, left: 2),
+                                              child: Center(
+                                                  child: Text(
+                                                "Terima",
+                                                style: GoogleFonts.workSans(
+                                                    color: Colors.white,
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              )),
+                                              height: 60,
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Constants
+                                                          .primaryColor),
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color:
+                                                      Constants.primaryColor),
+                                            ),
+                                          ),
+                                        ),
+                                      ]),
+                                ),
+                              )
+                            : '${widget.form.status}' == "Diterima" &&
+                                    uid != "E80hb9Qun4bUswTIyiUmfSmssbb2"
+                                ? Container(
+                                    // Barcode
+                                    )
+                                : '${widget.form.status}' == "Ditolak" &&
+                                        uid != "E80hb9Qun4bUswTIyiUmfSmssbb2"
+                                    ? Container(
+                                        // Status Penolakan
+                                        )
+                                    : Text("Done"),
               ],
             ),
           ],
@@ -488,12 +524,12 @@ class _DetailedFormState extends State<DetailedForm> {
 
   void tapHapus() async {
     await FirebaseFirestore.instance
-    .collection('users')
-    .doc(widget.form.uid)
-    .collection('form')
-    .doc(widget.form.id)
-    .delete();
-      Navigator.pushReplacement(context,
+        .collection('users')
+        .doc(widget.form.uid)
+        .collection('form')
+        .doc(widget.form.id)
+        .delete();
+    Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (BuildContext context) => AuthPage()));
   }
 

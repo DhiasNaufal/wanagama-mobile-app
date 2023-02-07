@@ -16,7 +16,7 @@ class _AdminHistoryPageState extends State<AdminHistoryPage> {
   Future getFormList()async {
     var data = await FirebaseFirestore
     .instance
-    .collectionGroup('users')
+    .collectionGroup('form').where('status', isNotEqualTo:'Diproses' )
     .get();
 
     setState((){
