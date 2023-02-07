@@ -4,24 +4,23 @@ import 'package:flutter/material.dart';
 import '../../components/form_card.dart';
 import '../../models/form.dart';
 
-class InboxAdmin extends StatefulWidget {
-  const InboxAdmin({super.key});
+class AdminHistoryPage extends StatefulWidget {
+  const AdminHistoryPage({super.key});
 
   @override
-  State<InboxAdmin> createState() => _InboxAdminState();
+  State<AdminHistoryPage> createState() => _AdminHistoryPageState();
 }
 
-class _InboxAdminState extends State<InboxAdmin> {
-  List<Object>inboxList =[];
-
+class _AdminHistoryPageState extends State<AdminHistoryPage> {
+  List<Object>historyList =[];
   Future getFormList()async {
     var data = await FirebaseFirestore
     .instance
-    .collectionGroup('form').where('status', isEqualTo: 'Diproses')
+    .collectionGroup('users')
     .get();
 
     setState((){
-      inboxList = List.from(data.docs.map((doc) => Forms.fromSnapshot(doc)));
+      historyList = List.from(data.docs.map((doc) => Forms.fromSnapshot(doc)));
 
     });
   }
@@ -31,16 +30,15 @@ class _InboxAdminState extends State<InboxAdmin> {
     getFormList();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: getFormList,
         child: ListView.builder(
-          itemCount: inboxList.length,
+          itemCount: historyList.length,
           itemBuilder: (context, index) {
-            return FormCard(inboxList[index]as Forms);
+            return FormCard(historyList[index]as Forms);
           },),
       ),
     );

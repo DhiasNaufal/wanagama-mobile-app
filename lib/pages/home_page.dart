@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: PageStorage(
         bucket: bucket,
         child: currentScreen),
-      backgroundColor: Colors.transparent,  
+      backgroundColor: Constants.neutralColor,  
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -30,7 +30,6 @@ class _MyFormPageState extends State<MyFormPage> {
     'Camping',
     'Shooting',
     'Seminar',
-    'Seminar',
     'Pelatihan',
     'Pendidikan Lingkungan',
     'Video/Foto Komersil',
@@ -57,6 +56,7 @@ class _MyFormPageState extends State<MyFormPage> {
   final surveyController = TextEditingController();
   final jumlahController = TextEditingController();
   final String status = 'Draft';
+
   // ===================
   
 
@@ -90,9 +90,15 @@ class _MyFormPageState extends State<MyFormPage> {
     _form.jumlahRombongan= int.parse(jumlahController.text.trim());
     _form.status = status;
     _form.id = DateTime.now().millisecondsSinceEpoch.toString();
+    _form.uid = uid;
       
 
-    await FirebaseFirestore.instance.collection('users').doc(uid).collection('form').doc(_form.id).set(_form.toJson());
+    await FirebaseFirestore.instance
+    .collection('users')
+    .doc(uid)
+    .collection('form')
+    .doc(_form.id)
+    .set(_form.toJson());
     Fluttertoast.showToast(msg: 'Form Tersimpan');
     Navigator.pop(context);
     }

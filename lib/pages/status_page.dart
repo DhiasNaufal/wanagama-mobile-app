@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:wanagama_app/components/form_card.dart';
 import 'package:wanagama_app/models/form.dart';
 
+import '../constant.dart';
+
 class StatusPage extends StatefulWidget {
   @override
   State<StatusPage> createState() => _StatusPageState();
@@ -37,6 +39,7 @@ class _StatusPageState extends State<StatusPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Constants.neutralColor,
       body: ListView.builder(
         itemCount: statusList.length,
         itemBuilder: (context, index) {

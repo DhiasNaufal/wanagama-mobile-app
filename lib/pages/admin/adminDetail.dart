@@ -8,19 +8,20 @@ import 'package:wanagama_app/pages/auth_page.dart';
 import 'package:wanagama_app/pages/draft_page.dart';
 import 'package:wanagama_app/pages/home_page.dart';
 
-import '../constant.dart';
-import '../models/form.dart';
+import '../../constant.dart';
+import '../../models/form.dart';
 
-class DetailedForm extends StatefulWidget {
+
+class AdminDetailedForm extends StatefulWidget {
   final Forms form;
 
-  DetailedForm(this.form);
+  AdminDetailedForm(this.form);
 
   @override
-  State<DetailedForm> createState() => _DetailedFormState();
+  State<AdminDetailedForm> createState() => _AdminDetailedFormState();
 }
 
-class _DetailedFormState extends State<DetailedForm> {
+class _AdminDetailedFormState extends State<AdminDetailedForm> {
   bool _isVisible = false;
   final uid = FirebaseAuth.instance.currentUser?.uid;
 
@@ -318,150 +319,86 @@ class _DetailedFormState extends State<DetailedForm> {
                 SizedBox(
                   height: 25,
                 ),
-                '${widget.form.status}'=="Draft"? Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Container(
-                    height: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            spreadRadius: 1,
-                            blurRadius: 7),
-                      ],
+                Visibility(
+                  visible: true,
+                  child:'${widget.form.status}'=="Draft"? Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Container(
+                      height: 100,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              spreadRadius: 1,
+                              blurRadius: 7),
+                        ],
+                      ),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: tapHapus,
+                                child: Container(
+                                  margin: EdgeInsets.only(left: 10, right: 2),
+                                  child: Center(
+                                      child: Text(
+                                    'Hapus',
+                                    style: GoogleFonts.workSans(
+                                        color: Constants.primaryColor,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500),
+                                  )),
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Constants.primaryColor),
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Constants.primaryColor
+                                          .withOpacity(0.4)),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: tapKirim,
+                                child: Container(
+                                  margin: EdgeInsets.only(right: 10, left: 2),
+                                  child: Center(
+                                      child: Text(
+                                    "Kirim",
+                                    style: GoogleFonts.workSans(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500),
+                                  )),
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Constants.primaryColor),
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Constants.primaryColor),
+                                ),
+                              ),
+                            ),
+                          ]),
                     ),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: tapHapus,
-                              child: Container(
-                                margin: EdgeInsets.only(left: 10, right: 2),
-                                child: Center(
-                                    child: Text(
-                                  'Hapus',
-                                  style: GoogleFonts.workSans(
-                                      color: Constants.primaryColor,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500),
-                                )),
-                                height: 60,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Constants.primaryColor),
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Constants.primaryColor
-                                        .withOpacity(0.4)),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: tapKirim,
-                              child: Container(
-                                margin: EdgeInsets.only(right: 10, left: 2),
-                                child: Center(
-                                    child: Text(
-                                  "Kirim",
-                                  style: GoogleFonts.workSans(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500),
-                                )),
-                                height: 60,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Constants.primaryColor),
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Constants.primaryColor),
-                              ),
-                            ),
-                          ),
-                        ]),
-                  ),
-                )
+                  )
 
-                //Terima Tolak
-                :'${widget.form.status}'=="Diproses"&&uid!="E80hb9Qun4bUswTIyiUmfSmssbb2"?Container(
-                  // Container sedang diproses
-                )
-                :uid=="E80hb9Qun4bUswTIyiUmfSmssbb2"?Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Container(
-                    height: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            spreadRadius: 1,
-                            blurRadius: 7),
-                      ],
-                    ),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: tapTolak,
-                              child: Container(
-                                margin: EdgeInsets.only(left: 10, right: 2),
-                                child: Center(
-                                    child: Text(
-                                  'Tolak',
-                                  style: GoogleFonts.workSans(
-                                      color: Constants.primaryColor,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500),
-                                )),
-                                height: 60,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Constants.primaryColor),
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Constants.primaryColor
-                                        .withOpacity(0.4)),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: tapTerima,
-                              child: Container(
-                                margin: EdgeInsets.only(right: 10, left: 2),
-                                child: Center(
-                                    child: Text(
-                                  "Terima",
-                                  style: GoogleFonts.workSans(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500),
-                                )),
-                                height: 60,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Constants.primaryColor),
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Constants.primaryColor),
-                              ),
-                            ),
-                          ),
-                        ]),
-                  ),
-                )
-                
-                :'${widget.form.status}'=="Diterima"&&uid!="E80hb9Qun4bUswTIyiUmfSmssbb2"?Container(
-                  // Barcode
-                )
-                :'${widget.form.status}'=="Ditolak"&&uid!="E80hb9Qun4bUswTIyiUmfSmssbb2"?Container(
-                  // Status Penolakan
-                )
+                  //Terima Tolak
+                  :Text("Tiket"),
 
-                :Text("Done"),
+
+
+
+
+
+
+
+
+                ),
               ],
             ),
           ],
@@ -487,14 +424,19 @@ class _DetailedFormState extends State<DetailedForm> {
   }
 
   void tapHapus() async {
+    final String newStatus = 'Proses';
+    widget.form.status = newStatus;
     await FirebaseFirestore.instance
-    .collection('users')
-    .doc(widget.form.uid)
-    .collection('form')
-    .doc(widget.form.id)
-    .delete();
-      Navigator.pushReplacement(context,
+        .collection('users')
+        .doc(uid)
+        .collection('form')
+        .doc(widget.form.id)
+        .update({
+      'status': "Diproses",
+    });
+    Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (BuildContext context) => AuthPage()));
+    //Navigator.of(context).pop();
   }
 
   void tapTerima() async {
@@ -502,11 +444,11 @@ class _DetailedFormState extends State<DetailedForm> {
     widget.form.status = newStatus;
     await FirebaseFirestore.instance
         .collection('users')
-        .doc(widget.form.uid)
+        .doc(uid)
         .collection('form')
         .doc(widget.form.id)
         .update({
-      'status': "Diterima",
+      'status': "Diproses",
     });
     Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (BuildContext context) => AuthPage()));
@@ -518,11 +460,11 @@ class _DetailedFormState extends State<DetailedForm> {
     widget.form.status = newStatus;
     await FirebaseFirestore.instance
         .collection('users')
-        .doc(widget.form.uid)
+        .doc(uid)
         .collection('form')
         .doc(widget.form.id)
         .update({
-      'status': "Ditolak",
+      'status': "Diproses",
     });
     Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (BuildContext context) => AuthPage()));

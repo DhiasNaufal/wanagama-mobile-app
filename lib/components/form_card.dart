@@ -15,72 +15,123 @@ class FormCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: ((context) => DetailedForm(_form))));
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: ((context) => DetailedForm(_form))));
       },
       child: Container(
-        child: Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          color: Constants.primaryColor,
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 3.0),
+          child: Card(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            color: Colors.white,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: [
-                        Icon(Icons.person,
-                        color: Colors.white,),
-                        Text(
-                          "${_form.namaLengkap}",
-                          style: GoogleFonts.poppins(
-                            fontSize: 18,
-                            color: Colors.white
-                          )
-                        ),
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 3.0),
+                      child: Image.asset(
+                        'lib/assets/images/wanagama_hor.png',
+                        scale: 13,
+                      ),
                     ),
                     Container(
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      padding: EdgeInsets.symmetric(horizontal: 2, vertical: 3),
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(5)
-                      ),
+                          color: "${_form.status}" == "Ditolak"
+                              ? Colors.red
+                              : "${_form.status}" == "Diterima"
+                                  ? Colors.green
+                                  : "${_form.status}" == "Diproses"
+                                      ? Colors.orange
+                                      : Colors.blueGrey,
+                          borderRadius: BorderRadius.circular(5)),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Text(
                           "${_form.status}",
                           style: TextStyle(
-                            fontFamily: 'Bellota',
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold
-                          ),
-                          ),
+                              fontFamily: 'Bellota',
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     )
-    
                   ],
                 ),
-                SizedBox(height: 10,),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8)
-                    ),
-                    child:Padding(
-                      padding: const EdgeInsets.all(8.0),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child: Text(
+                    '${_form.tujuan}',
+                    style: GoogleFonts.poppins(fontSize: 16),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left:10.0),
+                  child: Row(
+                    children: [
+                      Icon(Icons.person),
+                      Text(
+                        '${_form.namaLengkap}',
+                        style: GoogleFonts.poppins(fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ),
+                Divider(
+                  thickness: 3,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        //mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("${_form.tujuan}"),
-                          Text("${_form.tangalMulai} - ${_form.tanggalAkhir}")
-                        ]),
-                    ) ,
-                  )
-                ],
-              ),
+                          Text("${_form.waktuMulai}",
+                              style: GoogleFonts.poppins(
+                                  fontSize: 18, fontWeight: FontWeight.w500)),
+                          Text("${_form.tangalMulai}",
+                              style: GoogleFonts.poppins(
+                                fontSize: 16,
+                              )),
+                        ],
+                      ),
+                    ),
+                    Icon(Icons.arrow_forward),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: Column(
+                        //mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "${_form.waktuAkhir}",
+                            style: GoogleFonts.poppins(
+                                fontSize: 18, fontWeight: FontWeight.w500),
+                          ),
+                          Text("${_form.tanggalAkhir}",
+                              style: GoogleFonts.poppins(
+                                fontSize: 16,
+                              )),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+              ],
+            ),
           ),
         ),
       ),

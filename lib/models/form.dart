@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Forms{
@@ -14,6 +15,7 @@ class Forms{
     int? jumlahRombongan;
     String? status;  
     String? id;
+    String? uid;
 
     Forms();
     Map<String, dynamic> toJson()=>{
@@ -30,6 +32,7 @@ class Forms{
       'jumlah rombongan':jumlahRombongan,
       'status': status,   
       'docId':id,  
+      'userId': uid,
     };
 
   Forms.fromSnapshot(snapshot)
@@ -45,7 +48,8 @@ class Forms{
       survey = snapshot.data()['survey'],
       jumlahRombongan = snapshot.data()['jumlah rombongan'],
       status = snapshot.data()['status'],
-      id = snapshot.data()['docId'];
+      id = snapshot.data()['docId'],
+      uid = snapshot.data()['userId'];
 
 
 

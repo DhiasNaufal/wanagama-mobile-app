@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:wanagama_app/pages/admin/adminHistory_page.dart';
 import 'package:wanagama_app/pages/admin/inboxAdmin.dart';
+import 'package:wanagama_app/pages/profile_page.dart';
 
 import '../../constant.dart';
 
@@ -20,14 +22,15 @@ Widget currentScreen = InboxAdmin();
 
 class _AdminHomePageState extends State<AdminHomePage> {
   final user = FirebaseAuth.instance.currentUser!;
-  int currentTab = 0;
+  int currentTab = 1;
   final List<Widget> screens = [
     InboxAdmin(),
     
   ];
     List<String> titleList = [
+    'History',
     'Inbox',
-    'Done',
+    'Profile',
   ];
   @override
   Widget build(BuildContext context) {
@@ -54,151 +57,99 @@ class _AdminHomePageState extends State<AdminHomePage> {
       ),
       bottomNavigationBar: BottomAppBar(
         color: Constants.primaryColor,
-        shape: CircularNotchedRectangle(),
         notchMargin: 9,
         child: Container(
           height: 60,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    MaterialButton(
-                      minWidth: 40,
-                      onPressed: () {
-                        setState(() {
-                          currentScreen =InboxAdmin();
-                          currentTab = 0;
-                        });
-                      },
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.home,
-                              color: currentTab == 0
-                                  ? Color.fromARGB(243, 243, 209, 16)
-                                  : Colors.white,
-                            ),
-                            Text(
-                              "Home",
-                              style: TextStyle(
-                                fontFamily: "Bellota",
-                                fontWeight: FontWeight.bold,
-                                color: currentTab == 0
-                                    ? Color.fromARGB(243, 243, 209, 16)
-                                    : Colors.white,
-                              ),
-                            ),
-                          ]),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    MaterialButton(
-                      minWidth: 40,
-                      onPressed: () {
-                        setState(() {
-                          currentScreen = InboxAdmin();
-                          currentTab = 1;
-                        });
-                      },
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.drafts_rounded,
-                              color: currentTab == 1
-                                  ? Color.fromARGB(243, 243, 209, 16)
-                                  : Colors.white,
-                            ),
-                            Text(
-                              "Draft",
-                              style: TextStyle(
-                                fontFamily: "Bellota",
-                                fontWeight: FontWeight.bold,
-                                color: currentTab == 1
-                                    ? Color.fromARGB(243, 243, 209, 16)
-                                    : Colors.white,
-                              ),
-                            ),
-                          ]),
-                    ),
-                  ],
-                ),
+              MaterialButton(
+                minWidth: 40,
+                onPressed: () {
+                  setState(() {
+                    currentScreen = AdminHistoryPage();
+                    currentTab = 0;
+                  });
+                },
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.history,
+                        color: currentTab == 0
+                            ? Color.fromARGB(243, 243, 209, 16)
+                            : Colors.white,
+                      ),
+                      Text(
+                        "History",
+                        style: TextStyle(
+                          fontFamily: "Bellota",
+                          fontWeight: FontWeight.bold,
+                          color: currentTab == 0
+                              ? Color.fromARGB(243, 243, 209, 16)
+                              : Colors.white,
+                        ),
+                      ),
+                    ]),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    MaterialButton(
-                      minWidth: 40,
-                      onPressed: () {
-                        setState(() {
-                          currentScreen = InboxAdmin();
-                          currentTab = 2;
-                        });
-                      },
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.assignment_turned_in_rounded,
-                              color: currentTab == 2
-                                  ? Color.fromARGB(243, 243, 209, 16)
-                                  : Colors.white,
-                            ),
-                            Text(
-                              "Status",
-                              style: TextStyle(
-                                fontFamily: "Bellota",
-                                fontWeight: FontWeight.bold,
-                                color: currentTab == 2
-                                    ? Color.fromARGB(243, 243, 209, 16)
-                                    : Colors.white,
-                              ),
-                            ),
-                          ]),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    MaterialButton(
-                      minWidth: 40,
-                      onPressed: () {
-                        setState(() {
-                          currentScreen = InboxAdmin();
-                          currentTab = 3;
-                        });
-                      },
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.person,
-                              color: currentTab == 3
-                                  ? Color.fromARGB(243, 243, 209, 16)
-                                  : Colors.white,
-                            ),
-                            Text(
-                              "Profile",
-                              style: TextStyle(
-                                fontFamily: "Bellota",
-                                fontWeight: FontWeight.bold,
-                                color: currentTab == 3
-                                    ? Color.fromARGB(243, 243, 209, 16)
-                                    : Colors.white,
-                              ),
-                            ),
-                          ]),
-                    ),
-                  ],
-                ),
+              MaterialButton(
+                minWidth: 40,
+                onPressed: () {
+                  setState(() {
+                    currentScreen =InboxAdmin();
+                    currentTab = 1;
+                  });
+                },
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.inbox,
+                        color: currentTab == 1
+                            ? Color.fromARGB(243, 243, 209, 16)
+                            : Colors.white,
+                      ),
+                      Text(
+                        "Inbox",
+                        style: TextStyle(
+                          fontFamily: "Bellota",
+                          fontWeight: FontWeight.bold,
+                          color: currentTab == 1
+                              ? Color.fromARGB(243, 243, 209, 16)
+                              : Colors.white,
+                        ),
+                      ),
+                    ]),
               ),
+              MaterialButton(
+                minWidth: 40,
+                onPressed: () {
+                  setState(() {
+                    currentScreen = ProfilePage();
+                    currentTab = 2;
+                  });
+                },
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.admin_panel_settings,
+                        color: currentTab == 2
+                            ? Color.fromARGB(243, 243, 209, 16)
+                            : Colors.white,
+                      ),
+                      Text(
+                        "Admin",
+                        style: TextStyle(
+                          fontFamily: "Bellota",
+                          fontWeight: FontWeight.bold,
+                          color: currentTab == 2
+                              ? Color.fromARGB(243, 243, 209, 16)
+                              : Colors.white,
+                        ),
+                      ),
+                    ]),
+              ),              
             ],
           ),
         ),
