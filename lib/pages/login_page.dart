@@ -13,9 +13,12 @@ class LoginPage extends StatefulWidget {
 
   @override
   State<LoginPage> createState() => _LoginPageState();
+  
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool _isHide = true;
+  
   final emailController = TextEditingController();
 
   final passwordController = TextEditingController();
@@ -117,6 +120,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 10,),
               // Username Field
               MyTextField(
+                keyboardType: TextInputType.emailAddress,
                 controller: emailController,
                 hintText: 'Email', 
                 obscureText: false, fieldIcon: Icons.person,
@@ -125,12 +129,21 @@ class _LoginPageState extends State<LoginPage> {
           
               SizedBox(height: 10,),
           
-              MyTextField(         
+              MyTextField(        
                 controller: passwordController,
                 hintText: 'Password',
-                obscureText: true, fieldIcon: Icons.key,
+                obscureText: _isHide, 
+                  fieldIcon: Icons.key,
                 fieldAction: TextInputAction.done,
-              ),
+                suffix: InkWell(
+                  onTap: _togglePasswordView,
+                  child: Icon(
+                      _isHide
+                      ? Icons.visibility_off
+                      : Icons.visibility,
+                    ),
+                ),
+                ),
                 
               // forgot password
               Padding(
@@ -238,14 +251,18 @@ class _LoginPageState extends State<LoginPage> {
               ),
 
               SizedBox(height: 25,),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Text(
-                  '2023 © khdtk wanagama ugm')),          
+              Text(
+                '2023 © KHDTK Wanagama UGM'),          
             ],),
           ),
         ),
       ),
     );
+  }
+  
+  void _togglePasswordView() {
+    setState(() {
+        _isHide = !_isHide;
+    });
   }
 }

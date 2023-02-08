@@ -6,6 +6,8 @@ import 'package:wanagama_app/components/my_button.dart';
 import 'package:wanagama_app/components/my_textfield.dart';
 import 'package:wanagama_app/components/square_tile.dart';
 
+import '../services/auth_services.dart';
+
 class RegistrationPage extends StatefulWidget {
   void Function()? onTap;
   RegistrationPage({super.key, required this.onTap});
@@ -15,6 +17,7 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
+  bool _isHide = true;
   final String? uid = FirebaseAuth.instance.currentUser?.uid;
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
@@ -121,6 +124,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               
                 // Email              
                 MyTextField(
+                  keyboardType: TextInputType.emailAddress,
                   controller: emailController, 
                   hintText: 'Email Address', 
                   obscureText: false, 
@@ -134,9 +138,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 MyTextField(
                   controller: passwordController, 
                   hintText: 'Password', 
-                  obscureText: true, 
+                  obscureText: _isHide, 
                   fieldIcon: Icons.lock,
-                  fieldAction: TextInputAction.next,                
+                  fieldAction: TextInputAction.next,
+                  suffix: InkWell(
+                  onTap: _togglePasswordView,
+                  child: Icon(
+                      _isHide
+                      ? Icons.visibility_off
+                      : Icons.visibility,
+                    ),
+                ),              
                 ),
               
                 SizedBox(height: 10,),
@@ -145,9 +157,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 MyTextField(
                   controller:confirmpassewordController, 
                   hintText: 'Konfirmasi Password', 
-                  obscureText: true, 
+                  obscureText: _isHide, 
                   fieldIcon: Icons.key,
-                  fieldAction: TextInputAction.done,                
+                  fieldAction: TextInputAction.done, 
+                  suffix: InkWell(
+                  onTap: _togglePasswordView,
+                  child: Icon(
+                      _isHide
+                      ? Icons.visibility_off
+                      : Icons.visibility,
+                    ),
+                ),                             
                 ),
                 SizedBox(height:40,),
               
@@ -201,27 +221,57 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
           
               SizedBox(height: 10,),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SquareTile(
-                      imagePath: "lib/assets/images/google_logo.png"
-                      ),
-          
-                    SizedBox(width: 10,),
-          
-                    SquareTile(
-                      imagePath: "lib/assets/images/facebook_logo.png"
-                      ),
-                  ],
+              GestureDetector(
+                onTap: () => AuthService().signInWithGoogle(),
+                child: Container(
+                  padding: EdgeInsets.all(7),
+                  margin: EdgeInsets.symmetric(horizontal: 25),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(1),
+                    color: Colors.blueGrey,
+                  ),
+                  child: Center(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 12,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(1),
+              
+                            ),
+                            child: Image.asset('lib/assets/images/google_logo.png',
+                            height: 40,),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 85,
+                          child: Center(
+                            child: Text(
+                              'Sign in with Google ',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16  ,
+                                fontWeight: FontWeight.bold
+                              ),
+                              ),
+                          ),
+                        ),
+                      ],
+                    )),
                 ),
               ),
+
               ],),
           ),
         ),
       ),
     );
+  }
+    void _togglePasswordView() {
+    setState(() {
+        _isHide = !_isHide;
+    });
   }
 }

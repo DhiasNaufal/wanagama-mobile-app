@@ -1,3 +1,4 @@
+import 'package:barcode_widget/barcode_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +54,7 @@ class _DetailedFormState extends State<DetailedForm> {
                       padding: const EdgeInsets.only(left: 10.0),
                       child: Text(
                         'Formulir Pemesanan',
-                        style: GoogleFonts.bellota(
+                        style: GoogleFonts.bellotaText(
                             color: Colors.white,
                             fontSize: 29,
                             fontWeight: FontWeight.w700),
@@ -64,7 +65,6 @@ class _DetailedFormState extends State<DetailedForm> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 10),
                       padding:
@@ -80,7 +80,7 @@ class _DetailedFormState extends State<DetailedForm> {
                           borderRadius: BorderRadius.circular(8)),
                       child: Text(
                         "${widget.form.status}",
-                        style: GoogleFonts.bellotaText(fontSize: 17),
+                        style: GoogleFonts.bellota(fontSize: 17),
                       ),
                     ),
                   ],
@@ -129,8 +129,8 @@ class _DetailedFormState extends State<DetailedForm> {
                                   ),
                                   Text(
                                     "${widget.form.jumlahRombongan}",
-                                    style: GoogleFonts.poppins(
-                                        color: Colors.white),
+                                    style: TextStyle(
+                                        fontSize: 16, color: Colors.white),
                                   ),
                                 ],
                               ),
@@ -141,12 +141,12 @@ class _DetailedFormState extends State<DetailedForm> {
                           height: 1,
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           child: Row(
                             children: [
                               Text(
                                 '${widget.form.tujuan}',
-                                style: GoogleFonts.poppins(fontSize: 19),
+                                style: TextStyle(fontSize: 23),
                               ),
                             ],
                           ),
@@ -155,52 +155,54 @@ class _DetailedFormState extends State<DetailedForm> {
                           thickness: 2,
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 15,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 15.0),
+                                  const EdgeInsets.symmetric(horizontal: 20.0),
                               child: Column(
                                 //mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text("${widget.form.waktuMulai}",
-                                      style: GoogleFonts.poppins(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500)),
-                                  Text("${widget.form.tangalMulai}",
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 16,
-                                      )),
+                                  Text(
+                                    "${widget.form.waktuMulai}",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "${widget.form.tangalMulai}",
+                                    style: TextStyle(fontSize: 18),
+                                  ),
                                 ],
                               ),
                             ),
                             Icon(Icons.arrow_forward),
                             Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 15.0),
+                                  const EdgeInsets.symmetric(horizontal: 20.0),
                               child: Column(
                                 //mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     "${widget.form.waktuAkhir}",
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500),
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
                                   ),
-                                  Text("${widget.form.tanggalAkhir}",
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 16,
-                                      )),
+                                  Text(
+                                    "${widget.form.tanggalAkhir}",
+                                    style: TextStyle(fontSize: 18),
+                                  ),
                                 ],
                               ),
                             ),
                           ],
                         ),
                         SizedBox(
-                          height: 15,
+                          height: 20,
                         ),
                       ],
                       //Judul Tujuan
@@ -217,7 +219,7 @@ class _DetailedFormState extends State<DetailedForm> {
                       Text(
                         "Detail Pemesan",
                         style: GoogleFonts.bellotaText(
-                            fontSize: 18, fontWeight: FontWeight.w500),
+                            fontSize: 18, fontWeight: FontWeight.w600),
                       ),
                     ],
                   ),
@@ -241,7 +243,10 @@ class _DetailedFormState extends State<DetailedForm> {
                           child: Row(
                             children: [
                               Icon(Icons.person),
-                              Text('${widget.form.namaLengkap}'),
+                              Text(
+                                '${widget.form.namaLengkap}',
+                                style: TextStyle(fontSize: 18),
+                              ),
                             ],
                           ),
                         ),
@@ -256,20 +261,28 @@ class _DetailedFormState extends State<DetailedForm> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Nomor Telepon'),
-                                  Text('${widget.form.nomorHandphone}'),
+                                  Text(
+                                    'Nomor Telepon',
+                                    style: TextStyle(
+                                        fontSize: 15, color: Colors.grey[600]),
+                                  ),
+                                  Text(
+                                    '${widget.form.nomorHandphone}',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
                                 ],
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  Text('Alamat email'),
+                                  Text(
+                                    'Alamat email',
+                                    style: TextStyle(
+                                        fontSize: 15, color: Colors.grey[600]),
+                                  ),
                                   Text(
                                     '${widget.form.email}',
-                                    style: GoogleFonts.bellotaText(
-                                      fontWeight: FontWeight.w900,
-                                      fontSize: 17,
-                                    ),
+                                    style: TextStyle(fontSize: 16),
                                   ),
                                 ],
                               ),
@@ -289,32 +302,26 @@ class _DetailedFormState extends State<DetailedForm> {
                                 children: [
                                   Text(
                                     'Nama Instansi',
-                                    style: GoogleFonts.bellotaText(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 15,
-                                    ),
+                                    style: TextStyle(
+                                        fontSize: 15, color: Colors.grey[600]),
                                   ),
                                   Text(
                                     '${widget.form.namaInstansi}',
-                                    style: GoogleFonts.bellotaText(
-                                      fontWeight: FontWeight.w900,
-                                      fontSize: 15,
-                                    ),
+                                    style: TextStyle(fontSize: 16),
                                   ),
                                 ],
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  Text('Status Survey',
-                                      style: GoogleFonts.workSans()),
                                   Text(
-                                    '${widget.form.survey}' +
-                                        " melakukan Survey",
-                                    style: GoogleFonts.inter(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 15,
-                                    ),
+                                    'Status Survey',
+                                    style: TextStyle(
+                                        fontSize: 15, color: Colors.grey[600]),
+                                  ),
+                                  Text(
+                                    '${widget.form.survey}',
+                                    style: TextStyle(fontSize: 16),
                                   ),
                                 ],
                               ),
@@ -331,6 +338,7 @@ class _DetailedFormState extends State<DetailedForm> {
                 SizedBox(
                   height: 25,
                 ),
+                //==================== User Mengirim Atau Menghapus =========================
                 '${widget.form.status}' == "Draft"
                     ? Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -402,12 +410,39 @@ class _DetailedFormState extends State<DetailedForm> {
                         ),
                       )
 
-                    //Terima Tolak
+                    //==================== User Menunggu  Diproses =========================
                     : '${widget.form.status}' == "Diproses" &&
                             uid != "E80hb9Qun4bUswTIyiUmfSmssbb2"
                         ? Container(
+                            margin: EdgeInsets.symmetric(horizontal: 10),
                             // Container sedang diproses
-                            )
+                            height: 100,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    spreadRadius: 1,
+                                    blurRadius: 7),
+                              ],
+                            ),
+                            child: Row(children: [
+                              Image.asset(
+                                  'lib/assets/images/kakek_wanagama.png'),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Formulir anda sedang Diproses",
+                                    style: GoogleFonts.bellota(fontSize: 20),
+                                  ),
+                                  Text("...")
+                                ],
+                              )
+                            ]),
+                          )
+                        //==================== Admin Menerima Atau Menolak =========================
                         : '${widget.form.status}' == "Diproses" &&
                                 uid == "E80hb9Qun4bUswTIyiUmfSmssbb2"
                             ? Padding(
@@ -487,17 +522,125 @@ class _DetailedFormState extends State<DetailedForm> {
                                       ]),
                                 ),
                               )
+                            //==================== User Menerima Tiket yang disetujui =========================
                             : '${widget.form.status}' == "Diterima" &&
                                     uid != "E80hb9Qun4bUswTIyiUmfSmssbb2"
-                                ? Container(
-                                    // Barcode
-                                    )
+                                ? Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color:
+                                                  Colors.black.withOpacity(0.2),
+                                              spreadRadius: 1,
+                                              blurRadius: 7),
+                                        ],
+                                      ),
+                                      // Barcode
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 20.0, vertical: 20),
+                                        child: BarcodeWidget(
+                                          barcode: Barcode.code128(),
+                                          data: '${widget.form.id}',
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                //==================== User Menerima Tiket yang ditolak =========================
                                 : '${widget.form.status}' == "Ditolak" &&
                                         uid != "E80hb9Qun4bUswTIyiUmfSmssbb2"
                                     ? Container(
+                                        //padding: EdgeInsets.symmetric(horizontal: 100),
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.black
+                                                    .withOpacity(0.2),
+                                                spreadRadius: 1,
+                                                blurRadius: 7),
+                                          ],
+                                        ),
                                         // Status Penolakan
-                                        )
-                                    : Text("Done"),
+                                        child: Column(
+                                          children: [
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Expanded(
+                                                    flex: 20,
+                                                    child: Icon(Icons.warning)),
+                                                Expanded(
+                                                    flex: 70,
+                                                    child: Text(
+                                                        'Mohon maaf, formulir anda ditolak')),
+                                                Expanded(
+                                                  flex: 10,
+                                                  child: Image.asset(
+                                                    'lib/assets/images/siGama.png',
+                                                    scale: 8,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                          ],
+                                        ))
+                                    : Container(
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        height: 100,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.black
+                                                    .withOpacity(0.2),
+                                                spreadRadius: 1,
+                                                blurRadius: 7),
+                                          ],
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 120,
+                                                    vertical: 20),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Constants
+                                                            .primaryColor),
+                                                    borderRadius: BorderRadius.circular(10),
+                                                    color: Colors.green),
+                                                child: Text("Done",
+                                                style: GoogleFonts.bellota(
+                                                  fontSize: 20,
+                                                  color: Constants.primaryColor,
+                                                  fontWeight: FontWeight.bold
+                                                ),
+                                                )),
+                                          ],
+                                        )),
               ],
             ),
           ],

@@ -68,7 +68,9 @@ class FormCard extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 10.0),
                   child: Text(
                     '${_form.tujuan}',
-                    style: GoogleFonts.poppins(fontSize: 16),
+                    style: TextStyle(
+                      fontSize: 19
+                    ),
                   ),
                 ),
                 Padding(
@@ -78,7 +80,7 @@ class FormCard extends StatelessWidget {
                       Icon(Icons.person),
                       Text(
                         '${_form.namaLengkap}',
-                        style: GoogleFonts.poppins(fontSize: 16),
+                        style: TextStyle(fontSize: 16),
                       ),
                     ],
                   ),
@@ -98,12 +100,9 @@ class FormCard extends StatelessWidget {
                         //mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text("${_form.waktuMulai}",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 18, fontWeight: FontWeight.w500)),
+                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                           Text("${_form.tangalMulai}",
-                              style: GoogleFonts.poppins(
-                                fontSize: 16,
-                              )),
+                              style: TextStyle(fontSize: 18),),
                         ],
                       ),
                     ),
@@ -115,13 +114,10 @@ class FormCard extends StatelessWidget {
                         children: [
                           Text(
                             "${_form.waktuAkhir}",
-                            style: GoogleFonts.poppins(
-                                fontSize: 18, fontWeight: FontWeight.w500),
+                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           Text("${_form.tanggalAkhir}",
-                              style: GoogleFonts.poppins(
-                                fontSize: 16,
-                              )),
+                              style: TextStyle(fontSize: 18),),
                         ],
                       ),
                     ),

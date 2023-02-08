@@ -7,6 +7,8 @@ class MyTextField extends StatelessWidget {
   final bool obscureText;
   final IconData fieldIcon;
   final fieldAction;
+  final keyboardType;
+  final suffix;
 
   const MyTextField({
     super.key, 
@@ -14,7 +16,7 @@ class MyTextField extends StatelessWidget {
     required this.hintText, 
     required this.obscureText, 
     required this.fieldIcon, 
-    this.fieldAction
+    this.fieldAction, this.keyboardType, this.suffix
     });
 
   @override
@@ -22,11 +24,13 @@ class MyTextField extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 25),
       child: TextField(
+        keyboardType: keyboardType,
         style: GoogleFonts.poppins(),
         textInputAction: fieldAction,
         controller: controller,
         obscureText: obscureText,   
         decoration: InputDecoration(
+          suffixIcon: suffix,
           prefixIcon: Icon(fieldIcon),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
