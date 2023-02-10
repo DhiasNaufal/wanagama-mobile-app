@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.wanagama_app">
    <application
-        android:label="wanagama_app"
+        android:label="Wanagama"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
