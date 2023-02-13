@@ -2,12 +2,8 @@ import 'package:barcode_widget/barcode_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wanagama_app/components/detailText.dart';
 import 'package:wanagama_app/pages/auth_page.dart';
-import 'package:wanagama_app/pages/draft_page.dart';
-import 'package:wanagama_app/pages/home_page.dart';
 
 import '../constant.dart';
 import '../models/form.dart';
